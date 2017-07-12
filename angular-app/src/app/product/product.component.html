@@ -1,3 +1,17 @@
-<p>
-  product works!
-</p>
+<div class="col-sm-4 col-md-4 col-lg-4" *ngFor="let product of products">
+  <div class="thumbnail">
+    <img src="http://placehold.it/320x150" alt="商品图片">
+    <div class="caption">
+      <h4 class="pull-right">{{product.price}}</h4>
+      <h4>
+        <a href="javascript:;">{{product.title}}</a>
+      </h4>
+      <p>{{product.desc}}</p>
+    </div>
+    <!-- 评分 -->
+    <div>
+      <app-stars [rating]="product.rating"></app-stars>
+    </div>
+    <!--end: 评分 -->
+  </div>
+</div>
