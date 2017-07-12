@@ -25,16 +25,34 @@
 
         npm install --save jquery bootstrap
 
-        安装描述性文件
+    安装描述性文件
 
-            npm install @types/jquery --save-dev
-            npm install @types/bootstrap --save-dev
+        npm install @types/jquery --save-dev
+        npm install @types/bootstrap --save-dev
+
+    .angular-cli.json 写入
+
+        "scripts" : [
+            "../node_modules/jquery/jquery.js",
+            "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+        ],
+        "styles" : [
+            "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+        ]
+
+    在 style.css 中引入 bootstrap.css
+
+        @import "~bootstrap/dist/css/bootstrap.min.css"
 
 2. 模块布局
 
     app	项目自带的默认component
 
+        ng component g componentName,componentName( 多个组件以逗号隔开 )
+
     navbar	网页/APP导航条
+
+    carousel   轮播图
 
     search	搜索区域
 
