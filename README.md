@@ -29,3 +29,17 @@
 
             npm install @types/jquery --save-dev
             npm install @types/bootstrap --save-dev
+
+2. 模块布局
+
+    app	项目自带的默认component
+
+    navbar	网页/APP导航条
+
+    search	搜索区域
+
+    product	商品详情
+
+    stars	星级评分
+
+    foot	底部信息
