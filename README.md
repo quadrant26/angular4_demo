@@ -92,11 +92,17 @@
         Routerlet	在HTML中标记路由内容呈现位置的占位符指令
         Router	负责在运行时执行路由的对象，可以通过调用其navigate()和navigateByUrl()方法来导航到一个指定的路由
         RouterLink	在HTML中声明路由导航用的指令
+        
+            <a routerLink="/detail/1" routerLinkActive="active">detail</a>
+            <a [routerLink]="['/detail', news.id]">{{news.title}}</a>
+            <a [routerLink]="[{ outlets: { let2: ['news'] } }]">Contact</a>
+            routerLinkActive="active" // 在本路由激活时添加样式 .active
+            
         ActivatedRoute	当前激活的路由对象，保存着当前路由的信息，如路由地址，路由参数等
         
     配置
         
-        path：路由URL
+        path：路由URL   不能以斜杠 ('/') 开头, 否则报错
         
         component：路由对应的组件
         
