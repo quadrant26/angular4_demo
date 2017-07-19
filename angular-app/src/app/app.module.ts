@@ -13,6 +13,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { HomeComponent } from './home/home.component';
 import { Code404Component } from './code404/code404.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import {ProductService} from "./shared/product.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
