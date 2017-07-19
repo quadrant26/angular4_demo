@@ -177,8 +177,153 @@
         CanActivate：处理导航到某路由的情况。
         CanDeactivate：处理当前路由离开的情况。
         Resolve：在路由激活之前获取路由数据。
+
+5. 依赖注入
+    
+    1. 注入服务
         
+        服务文件 ( heroservice.ts )
+            
+            export class HeroService {
+                heros: Array<{ id: number; name: string }> = [
+                    { id: 11, name: 'Mr. Nice' },
+                    { id: 12, name: 'Narco' },
+                    { id: 13, name: 'Bombasto' },
+                    { id: 14, name: 'Celeritas' },
+                    { id: 15, name: 'Magneta' }
+                ];
+            
+                getHeros() {
+                    return this.heros;
+                }
+            }
         
+        导入 
+            
+            import { HeroService } from './heroservice';
+        
+        声明服务
+            
+	        @component({
+	            selector: 'app-hero',
+	              ...
+	            providers: [HeroService]
+	        })
+	        
+	        ||
+	        
+	        @NgModule({
+	            imports : [HeroComponent],
+	            bootstrap : [AppComponent],
+	            declarations : [AppComponent, HeroComponent],
+	            providers : [HeroService]
+	        })
+	        
+	    注入服务
+	        
+	        export class HeroComponent implements OnInit {
+              constructor(private heroService: HeroService) { }
+            }
+            
+    2. ClassProvider
+        
+        定义
+            
+            providers[{ provide: HeroService, useClass : HeroService }]
+            
+    3. FactoryProvider
+        
+            constructor(private heroService: HeroService,
+                private loggerService: LoggerService) { }
+        
+            { provide: LoggerService, useFactory: () => { return new LoggerService(true);} }
+            prividers : [
+                consoleService, 
+                HeroService, 
+                { 
+                    provide: LoggerService, 
+                    useFactory: (consoleService) => { return new LoggerService(true, consoleService);}, 
+                    deps : [consoleService]
+                }
+            ]
+    
+    4. Injectable装饰器
+        
+        表达式; 该表达式被执行后，返回一个函数; 入参分别为 targe、name 和 descriptor; 执行该函数后，可能返回 descriptor 对象，用于配置 target 对象
+        
+        类装饰器 (Class decorators)
+            
+            declare type ClassDecorator = <TFunction extends Function>(target: TFunction) =>    
+              TFunction | void
+        
+        属性装饰器 (Property decorators)
+        
+        方法装饰器 (Method decorators)
+        
+        参数装饰器 (Parameter decorators)
+        
+    5. ValueProvider 
+        
+        使用
+            
+            const provider: ValueProvider = {provide: 'someToken', useValue: 'someValue'};
+        
+        json-server 用于基于 JSON 数据快速地创建本地模拟的 REST API
+            
+            use: json-server --watch db.json
+        
+        example
+            
+            providers: [
+	            {
+	              provide: 'apiUrl',
+	              useValue: 'http://localhost:4200/heros'
+	            }
+           ],
+           
+    6. OpaqueToken 
+    
+        OpaqueToken 用于创建可在 Provider 中使用的 Token
+        
+        使用
+        
+            export class OpaqueToken {
+              constructor(protected _desc: string) {}
+            
+              toString(): string { return `Token ${this._desc}`; }
+            }
+            
+            import { ReflectiveInjector } from '@angular/core';
+            
+            var t = new OpaqueToken("value");
+            var injector = ReflectiveInjector.resolveAndCreate([
+              {provide: t, useValue: "bindingValue"}
+            ]);
+            injector.get(t); // "bindingValue"
+            
+    7. InjectionToken
+		
+		定义  
+			
+			export class InjectionToken<T> extends OpaqueToken {
+              private _differentiate_from_OpaqueToken_structurally: any;
+              constructor(desc: string) { super(desc); }
+            
+              toString(): string { return `InjectionToken ${this._desc}`; }
+            }
+        
+        使用 
+            
+            import { ReflectiveInjector } from '@angular/core';
+            
+            var t = new InjectionToken<string>("value");
+            var injector = ReflectiveInjector.resolveAndCreate([
+              {provide: t, useValue: "bindingValue"}
+            ]);
+            injector.get(t); // "bindingValue"
+6.
+
+7.
         
         
         
