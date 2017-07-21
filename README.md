@@ -351,7 +351,20 @@
         
     6. 双向数据绑定
         
-            <p [(ngModel)]="name">双向数据绑定</p> 
+            <p [(ngModel)]="name">双向数据绑定</p>
+            
+        表单控件双向绑定
+            
+            <input name="username" [(ngModel)]="username" />
+            
+            app.module.ts
+            
+            import { FormsModule } from '@angular/forms';
+            @NgModule({
+              declarations: [],
+              imports: [ ..., FormsModule ]
+            })
+            
 
 7. 管道
 	
