@@ -321,9 +321,80 @@
               {provide: t, useValue: "bindingValue"}
             ]);
             injector.get(t); // "bindingValue"
-6.
 
-7.
+6. 属性操作 
+	
+	1. 插值表达式
+		
+			<p>{{product}}</p> 
+	
+	2. 属性
+		
+			<img src="{{imgsrc}}" />
+			<img [src]="imgsrc" />
+	
+	3. 事件
+		
+			<p (click)="clickEvent($event)">click</p>
+		
+	4. dom 属性
+		
+			event.target.value
+		
+	5. html 属性
+		
+			event.target.getAttribute("value")
+			
+			<div class="aaa bbb" [class]="ccc">这种方式会替换原class属性的值</div>
+	        <div class="aaa bbb" [class.ccc]="true">这种方式不会替换原class属性的值</div>
+	        <div [ngClass]="{aaa:isTrue,bbb:isShow}">这种方式可以控制多个属性的显示</div>
+        
+    6. 双向数据绑定
+        
+            <p [(ngModel)]="name">双向数据绑定</p> 
+
+7. 管道
+	
+	1. 定义
+		
+			{{name | filter}}
+			eg:{{birthday | data}}// 将生日转化成日期格式
+	        eg:{{birthday | data:'yyyy-MM-dd HH:mm:ss'}}// 将生日转化成指定日期格式
+        
+    2. 自定义
+        
+        在项目中生成一个管道，然后在管道类的transform方法中对值进行操作。
+        
+            export class PipeName implements PipeTransform {
+                transform(value: any, arg: any): any {
+                    // value 是要在管道做处理的值
+                    // arg 是管道后面跟着的参数
+                }
+            }
+            
+    3. 响应式编程
+        
+        1、在项目模块中引入ReactiveFormsModule模块
+            
+            import { ReactiveFormsModule } from ''
+        
+        2、在组件中声明FormControl类型的字段
+        
+            eg:formControlName
+        
+        3、在页面中控件上声明
+            
+            [formControl]="formControlName"
+        
+        4、在组件中订阅formControlName的valueChanges事件
+        
+            eg:this.formControlName.valueChanges.subscribe(value => this.keyword = value);
+
+8. 组件通信
+
+9.
+
+10. 
         
         
         
