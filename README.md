@@ -405,6 +405,113 @@
 
 8. 组件通信
 
+		[(ngModel)]="attribute"; 报错
+		
+		需要在 app.modules.ts 中
+		
+		import {FormsModule, FormControl, ReactiveFormsModule} from '@angualar/forms';
+		
+		@NgModule({
+			...
+			imports : [
+				...
+				FormsModule
+				...
+			]
+			...
+		})
+		
+
+	1. 生命周期
+		
+		被调用一次的钩子
+		
+			constructor（组件构造方法，调用该方法时，组件的输入属性没有值）
+            
+            ngOnInit（初始化组件或指令，调用该方法时，OnChanges方法已被调用，组件的输入属性有值）
+            
+            ngAfterContentInit（和angular的内容投影相关的）
+            
+            ngAfterViewInit（和angular的视图初始化和检查相关的,在此方法不可修改组件的属性）
+            
+            ngOnDestroy（组件销毁，在路由到其他组件时当前组件被销毁）
+            
+        被调用多次的钩子
+            
+            ngOnChanges（父组件初始化或修改子组件的输入属性的值的时候被调用，如果一个方法没有输入属性，则该方法不会被调用）
+            
+            ngDoCheck（用来检测，在每个angular的变更检测周期调用）
+            
+            ngAfterContentChecked（和angular的内容投影相关的）
+            
+            ngAfterViewChecked（和angular的视图初始化和检查相关的,在此方法不可修改组件的属性）
+        
+        调用顺序：
+            
+            constructor、ngOnChanges、ngOnInit、ngDoCheck、ngAfterContentInit、ngAfterContentChecked、ngAfterViewInit、ngAfterViewChecked、ngAfterContentChecked、ngAfterViewChecked
+            
+	2. 输入输出属性
+		
+		输入属性
+			
+			在需要注入的属性上用@Input注解
+            在父组件中用[propName]="value"来赋值
+		
+		输出属性
+			
+			在子组件属性上用@Output解属性类型为EventEmitter<DataType>类型
+            @Output()
+            prop:EventEmitter<DataType> = new EventEmitter();
+            用 prop.emit(dataTypeObj)
+            
+            在父组件中声明dataTypeObj:DataType = DataType();//用来存放子组件Output出来的属性
+            
+            在父组件引用子组件的标签上用事件订阅来订阅自组建发射的事件
+            用<child-comp (prop)="propHandler($event);"></child-comp>
+            // 监控的事件名 prop 和@Output中的参数一致，不传参时默认和属性名一致
+            
+            在父组件中声明
+            propHandler(event:DataType){
+                // 把子组件Output出来的属性赋值到父组件的属性上
+                this.dataTypeObj = event;
+            }
+            
+        中间人
+            
+            两个子组件，通过@Output数据到父组件和@Input从父组件接收数据来实现组件间通讯，父组件为中间人
+            
+        父组件调用子组件的方法
+
+			在父组件的模块中调用子组件的方法
+            1、在子组件上声明模版变量 #childName
+            2、在父组件中声明一个类型为 ChildeComponent 的变量 child
+            3、用 @ViewChild("childName") 注解声明的变量 child
+            4、在代码块中用 this.child.methodName(args) 来调用子组件的方法
+            
+            #在父组件的模版中调用子组件的方法
+            
+            1、在子组件上声明模版变量 #childName
+            2、在父组件的模版中绑定事件 (click)="childName.methodName('args')"
+            
+        父组件内容投影到子组件中
+        
+            #父组件
+            <div>
+                <child-comp>
+                    <div class="header">这是头部</div>
+                    <div class="footer">这是底部</div>
+                </child-comp>
+            </div>
+            
+            #子组件
+            <div>
+                <ng-content select=".header"></ng-content>
+                <ng-content select=".footer"></ng-content>
+            </div>
+            
+            定义单个投影点时可以不写class属性和select属性
+		
+
 9.
 
 10. 
