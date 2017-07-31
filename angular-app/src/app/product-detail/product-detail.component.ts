@@ -13,6 +13,11 @@ export class ProductDetailComponent implements OnInit {
   product: Product;
   comments: Comment[];
 
+  newRating: number = 5;
+  newComment: string = "";
+
+  isCommentHidden:boolean = true;
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService
@@ -26,6 +31,20 @@ export class ProductDetailComponent implements OnInit {
     this.comments = this.productService.getCommentForProductId(productId);
 
     console.log(this.comments);
+
+  }
+
+  addComment() {
+    let comment = new Comment(0, this.product.id, new Date().toISOString(), "someone", this.newRating, this.newComment);
+    this.comments.unshift(comment);
+
+    // 重置
+    this.newComment = null;
+    this.newRating = 5;
+    this.isCommentHidden = true;
+
+    let sum = this.comments.reduce((sum, comment) => sum + comment.rating, 0);
+    this.product.rating = sum / this.comments.length;
 
   }
 
