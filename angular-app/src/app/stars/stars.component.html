@@ -1,8 +1,14 @@
 <p>
-  <i *ngFor="let star of stars" class="fa"
-     [class.fa-star]="star==='full'"
-     [class.fa-star-half-o]="star==='half'"
-     [class.fa-star-o]="star==='empty'"
-  ></i>
-  <span>{{rating}} 星</span>
+  <!--<i *ngFor="let star of stars; let i = index;" class="fa"-->
+     <!--[class.fa-star]="star==='full'"-->
+     <!--[class.fa-star-half-o]="star==='half'"-->
+     <!--[class.fa-star-o]="star==='empty'"-->
+     <!--(click)="clickStar(i)"-->
+  <!--&gt;</i>-->
+  <span *ngFor="let star of stars; let i = index;"
+        class="glyphicon glyphicon-star"
+        [class.glyphicon-star-empty]="star"
+        (click)="clickStar(i)"
+  ></span>
+ <span>{{rating}} 星</span>
 </p>
