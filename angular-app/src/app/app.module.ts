@@ -14,7 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { Code404Component } from './code404/code404.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import {ProductService} from "./shared/product.service";
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule, FormsModule, FormControl} from "@angular/forms";
 import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
@@ -33,6 +33,7 @@ import { FilterPipe } from './pipe/filter.pipe';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule
