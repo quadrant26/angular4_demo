@@ -1,5 +1,40 @@
 # angular4_demo
 
+Angular Cli 命令
+
+	创建新的 angular 项目 ng new project-name
+	
+	初始化 ng init
+	
+	开启服务 ng server
+	
+	ng generate 命令
+	
+	ng generate class my-new-class: 新建 class
+		--spec (false | true) 是否生成单元测试相关的 spec 文件
+    ng generate component my-new-component: 新建组件
+        --flat: boolean, 默认为 false, 表示在 src/app 目录下生成组件而不是在 src/app/site-header 目录中
+        --inline-template: boolean, 默认为 false, 表示使用内联模板而不是使用独立的模板文件
+        --inline-style: boolean, 默认为 false, 表示使用内联样式而不是使用独立的样式文件
+        --prefix: boolean, 默认为 true, 使用 .angular-cli.json 配置的前缀作为组件选择器的前缀
+        --spec: boolean, 默认为 true, 表示生成包含单元测试的 spec 文件
+        --view-encapsulation: string, 用于设置组件的视图封装策略
+        --change-detection: string, 用于设置组件的变化检测策略
+    ng generate directive my-new-directive: 新建指令
+    ng generate enum my-new-enum: 新建枚举
+    ng generate module my-new-module: 新建模块
+    ng generate pipe my-new-pipe: 新建管道
+    ng generate service my-new-service: 新建服务
+    
+    简写
+    ng g cl my-new-class: 新建 class
+    ng g c my-new-component: 新建组件
+    ng g d my-new-directive: 新建指令
+    ng g e my-new-enum: 新建枚举
+    ng g m my-new-module: 新建模块
+    ng g p my-new-pipe: 新建管道
+    ng g s my-new-service: 新建服务
+
 1. 环境搭建
 
         node verison 8.1.3
