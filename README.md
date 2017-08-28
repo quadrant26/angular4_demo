@@ -547,7 +547,21 @@ Angular Cli 命令
             定义单个投影点时可以不写class属性和select属性
 		
 
-9.
+9. Http 服务
+
+    使用 Http 服务步骤
+
+        (1) 从 @angular/http 模块中导入 Http 类
+
+        (2) 导入 RxJS 中的 map 操作符
+
+        (3) 使用 DI 方式注入 http 服务
+
+        (4) 调用 http 服务的 get() 方法，设置请求地址并发送 HTTP 请求
+
+        (5) 调用 Response 对象的 json() 方法，把响应体转成 JSON 对象
+
+        (6) 把请求的结果，赋值给对应的属性
 
 10. 
         
